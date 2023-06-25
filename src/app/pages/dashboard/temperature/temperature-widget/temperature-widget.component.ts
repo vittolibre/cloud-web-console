@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Client, Stomp } from '@stomp/stompjs';
+import { environment } from '../../../../../environments/environment';
 
 Object.assign({ WebSocket });
 
@@ -27,7 +28,7 @@ export class TemperatureWidgetComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     let SockJS = require('sockjs-client')
-    var socket = new SockJS('http://localhost:8080/ws');
+    var socket = new SockJS(environment.wsUrl);
     this.client = Stomp.over(socket);
 
     const self = this
