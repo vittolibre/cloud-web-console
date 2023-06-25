@@ -31,6 +31,7 @@ import { TrafficComponent } from './traffic/traffic.component';
 import { TrafficChartComponent } from './traffic/traffic-chart.component';
 import { FormsModule } from '@angular/forms';
 import { TemperatureWidgetComponent } from './temperature/temperature-widget/temperature-widget.component';
+import { NgxGaugeModule } from 'ngx-gauge';
 
 @NgModule({
   imports: [
@@ -47,6 +48,7 @@ import { TemperatureWidgetComponent } from './temperature/temperature-widget/tem
     NbIconModule,
     NbButtonModule,
     NgxEchartsModule,
+    NgxGaugeModule
   ],
   declarations: [
     DashboardComponent,

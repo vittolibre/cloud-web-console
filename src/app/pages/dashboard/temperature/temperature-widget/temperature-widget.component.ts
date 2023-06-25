@@ -11,8 +11,14 @@ Object.assign({ WebSocket });
 export class TemperatureWidgetComponent implements OnInit, OnDestroy {
 
   idDevice: string = ''
-  temperature: string = '0 °C'
   client: Client;
+
+  gaugeType = "full";
+  gaugeValue = 28.3;
+  gaugeLabel = "Temperatura";
+  gaugeAppendText = "°C";
+
+  option: any = {};
 
   constructor() { }
   ngOnDestroy(): void {
@@ -69,7 +75,7 @@ export class TemperatureWidgetComponent implements OnInit, OnDestroy {
       let mess:string = message.body;
       let data: string[] = mess.split('/');
       self.idDevice = data[0];
-      self.temperature = data[1];
+      self.gaugeValue = Math.random() * 20;
     };
 
 
