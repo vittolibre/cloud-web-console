@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DeviceService } from '../../service/device.service';
 import { SmartTableData } from '../../@core/data/smart-table';
 import { HttpErrorResponse } from '@angular/common/http';
-import { LocalDataSource } from 'ng2-smart-table';
+import { LocalDataSource, ViewCell } from 'ng2-smart-table';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-device',
@@ -15,11 +16,6 @@ export class DeviceComponent implements OnInit {
 
   settings = {
 
-    actions: {
-      add: true,
-      delete: true,
-      edit:true
-    },
     edit: {
       editButtonContent: '<i class="nb-edit"></i>',
       saveButtonContent: '<i class="nb-checkmark"></i>',
@@ -27,35 +23,40 @@ export class DeviceComponent implements OnInit {
       confirmSave: true,
     },
     delete: {
-      editButtonContent: '<i class="nb-edit"></i>',
-      saveButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-      confirmSave: true,
+      deleteButtonContent: '<i class="nb-trash"></i>',
+      confirmDelete: true,
     },
     add: {
-      editButtonContent: '<i class="nb-edit"></i>',
-      saveButtonContent: '<i class="nb-checkmark"></i>',
+      addButtonContent: '<i class="nb-plus"></i>',
+      createButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
-      confirmSave: true,
+      confirmCreate: true,
     },
     columns: {
     
       identifier: {
         title: 'UID',
-        type: 'string',
+        type: 'custom',
+        renderComponent: ButtonViewComponent,
+        onComponentInitFunction(instance) {
+          instance.save.subscribe(row => {
+            console.log(row.identifier)
+          });
+        }
+        
       },
       description: {
         title: 'Descrizione',
-        type: 'string',
+        type: 'text',
       },
       label: {
         title: 'Label',
-        type: 'string',
+        type: 'text',
         
       },
       edgeNode: {
         title: 'Nodo Edge',
-        type: 'string',
+        type: 'text',
         
       },
     },
@@ -63,7 +64,7 @@ export class DeviceComponent implements OnInit {
 
   constructor(
     private deviceService: DeviceService,
-    private service: SmartTableData
+    private service: SmartTableData,
   ) {
     this.deviceService.findAll().subscribe((data) => {
       this.source.load(data);
@@ -91,4 +92,28 @@ export class DeviceComponent implements OnInit {
   deleteDevice(event){
   }
 
+}
+
+@Component({
+  selector: 'button-view',
+  template: `
+  <button class="btn btn-outline-primary" (click)="onClick()">{{ renderValue }}</button>
+  `,
+})
+export class ButtonViewComponent implements ViewCell, OnInit {
+  renderValue: string;
+
+  @Input() value: string | number;
+  @Input() rowData: any;
+  @Output() save: EventEmitter<any> = new EventEmitter();
+
+  constructor(private router: Router){}
+
+  ngOnInit() {
+    this.renderValue = this.value.toString();
+  }
+
+  onClick() {
+    this.router.navigate(['/pages/device-detail', { uid: this.renderValue }]);
+  }
 }

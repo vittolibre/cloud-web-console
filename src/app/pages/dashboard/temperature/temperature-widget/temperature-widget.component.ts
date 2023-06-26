@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Client, Stomp } from '@stomp/stompjs';
 import { environment } from '../../../../../environments/environment';
 
@@ -21,7 +21,10 @@ export class TemperatureWidgetComponent implements OnInit, OnDestroy {
 
   option: any = {};
 
+  @Input() uid: string;
+
   constructor() { }
+
   ngOnDestroy(): void {
     this.client.deactivate();
   }

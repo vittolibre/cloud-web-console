@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Client, Stomp } from '@stomp/stompjs';
 import { environment } from '../../../../environments/environment';
 
@@ -15,6 +15,8 @@ export class HumiditywidgetComponent implements OnInit {
   gaugeValue = 28.3;
   gaugeLabel = "Umidità";
   gaugeAppendText = "%";
+
+  @Input() uid: string;
 
   constructor() { }
 

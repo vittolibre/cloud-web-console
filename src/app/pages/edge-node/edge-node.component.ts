@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { EdgeNodeService } from '../../service/edge-node.service';
 import { SmartTableData } from '../../@core/data/smart-table';
 import { HttpErrorResponse } from '@angular/common/http';
-import { LocalDataSource } from 'ng2-smart-table';
+import { LocalDataSource, ViewCell } from 'ng2-smart-table';
 
 @Component({
   selector: 'ngx-edge-node',
@@ -15,11 +15,6 @@ export class EdgeNodeComponent implements OnInit {
 
   settings = {
 
-    actions: {
-      add: true,
-      delete: true,
-      edit:true
-    },
     edit: {
       editButtonContent: '<i class="nb-edit"></i>',
       saveButtonContent: '<i class="nb-checkmark"></i>',
@@ -27,21 +22,25 @@ export class EdgeNodeComponent implements OnInit {
       confirmSave: true,
     },
     delete: {
-      editButtonContent: '<i class="nb-edit"></i>',
-      saveButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-      confirmSave: true,
+      deleteButtonContent: '<i class="nb-trash"></i>',
+      confirmDelete: true,
     },
     add: {
-      editButtonContent: '<i class="nb-edit"></i>',
-      saveButtonContent: '<i class="nb-checkmark"></i>',
+      addButtonContent: '<i class="nb-plus"></i>',
+      createButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
-      confirmSave: true,
+      confirmCreate: true,
     },
     columns: {
       hostname: {
         title: 'Hostname',
-        type: 'string',
+        type: 'custom',
+        renderComponent: ButtonViewComponent,
+        onComponentInitFunction(instance) {
+          instance.save.subscribe(row => {
+            console.log(row.hostname)
+          });
+        }
       },
       label: {
         title: 'Label',
@@ -85,4 +84,27 @@ export class EdgeNodeComponent implements OnInit {
   deleteNode(event){
   }
 
+}
+
+@Component({
+  selector: 'button-view',
+  template: `
+  <button class="btn btn-outline-primary" (click)="onClick()">{{ renderValue }}</button>
+  `,
+})
+export class ButtonViewComponent implements ViewCell, OnInit {
+  renderValue: string;
+
+  @Input() value: string | number;
+  @Input() rowData: any;
+
+  @Output() save: EventEmitter<any> = new EventEmitter();
+
+  ngOnInit() {
+    this.renderValue = this.value.toString();
+  }
+
+  onClick() {
+    this.save.emit(this.rowData);
+  }
 }
