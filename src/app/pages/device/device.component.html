@@ -1,0 +1,9 @@
+<nb-card>
+    <nb-card-header>
+       Lista Device
+    </nb-card-header>
+    <nb-card-body>
+        <ng2-smart-table [settings]="settings" [source]="source" (editConfirm)="editDevice($event)" (createConfirm)="createDevice($event)" (deleteConfirm)="deleteDevice($event)">
+        </ng2-smart-table>
+    </nb-card-body>
+</nb-card>

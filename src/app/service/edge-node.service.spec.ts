@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { KubeNodeService } from './kube-node.service';
+import { EdgeNodeService } from './edge-node.service';
 
-describe('KubeNodeService', () => {
-  let service: KubeNodeService;
+describe('EdgeNodeService', () => {
+  let service: EdgeNodeService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(KubeNodeService);
+    service = TestBed.inject(EdgeNodeService);
   });
 
   it('should be created', () => {

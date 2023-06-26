@@ -1,0 +1,9 @@
+<nb-card>
+    <nb-card-header>
+       Lista Nodi Edge
+    </nb-card-header>
+    <nb-card-body>
+        <ng2-smart-table [settings]="settings" [source]="source" (editConfirm)="updateNode($event)" (createConfirm)="createNode($event)" (deleteConfirm)="deleteNode($event)">
+        </ng2-smart-table>
+    </nb-card-body>
+</nb-card>

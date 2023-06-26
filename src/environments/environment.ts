@@ -10,6 +10,6 @@
 
 export const environment = {
   production: false,
-  appUrl:'http://mtd.cloud.app.local:32691/',
+  appUrl:'http://localhost:8080/',
   wsUrl:'http://localhost:8080/ws'
 };

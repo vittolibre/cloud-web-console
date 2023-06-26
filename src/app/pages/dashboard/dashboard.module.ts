@@ -30,7 +30,6 @@ import { PlayerComponent } from './rooms/player/player.component';
 import { TrafficComponent } from './traffic/traffic.component';
 import { TrafficChartComponent } from './traffic/traffic-chart.component';
 import { FormsModule } from '@angular/forms';
-import { TemperatureWidgetComponent } from './temperature/temperature-widget/temperature-widget.component';
 import { NgxGaugeModule } from 'ngx-gauge';
 
 @NgModule({
@@ -67,7 +66,8 @@ import { NgxGaugeModule } from 'ngx-gauge';
     SolarComponent,
     TrafficComponent,
     TrafficChartComponent,
-    TemperatureWidgetComponent,
+    // TemperatureWidgetComponent,
+    // HumiditywidgetComponent,
   ],
 })
 export class DashboardModule { }
