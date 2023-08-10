@@ -13,7 +13,6 @@ import { Router } from '@angular/router';
 export class DeviceComponent implements OnInit {
 
   source: LocalDataSource = new LocalDataSource();
-
   settings = {
 
     edit: {
@@ -57,7 +56,11 @@ export class DeviceComponent implements OnInit {
       edgeNode: {
         title: 'Nodo Edge',
         type: 'text',
-        
+        valuePrepareFunction: (edgeNode) => {
+          
+          return edgeNode == 1 ? 'region 1' : 'region 2';
+        },
+      
       },
     },
   };

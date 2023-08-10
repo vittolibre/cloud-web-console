@@ -16,12 +16,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'Device',
     icon: '',
     link: '/pages/devices',
-  },
-  {
-    title: 'Device',
-    icon: '',
-    link: '/pages/device-detail',
-  },
+  }
 
  
 ];

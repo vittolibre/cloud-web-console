@@ -79,7 +79,7 @@ export class TemperatureWidgetComponent implements OnInit, OnDestroy {
       let mess:string = message.body;
       let data: string[] = mess.split('/');
       self.idDevice = data[0];
-      self.gaugeValue = Math.random() * 20;
+      self.gaugeValue = Math.floor(20 + Math.random() * 5);
     };
 
 

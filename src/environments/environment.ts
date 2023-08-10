@@ -10,6 +10,6 @@
 
 export const environment = {
   production: false,
-  appUrl:'http://localhost:8080/',
-  wsUrl:'http://localhost:8080/ws'
+  appUrl:'http://localhost:9090/',
+  wsUrl:'http://localhost:9090/ws'
 };

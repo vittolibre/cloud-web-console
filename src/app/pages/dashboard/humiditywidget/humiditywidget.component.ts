@@ -73,7 +73,7 @@ export class HumiditywidgetComponent implements OnInit {
     let callback = function (message) {
       let mess:string = message.body;
       let data: string[] = mess.split('/');
-      self.gaugeValue = Math.random() * 60;
+      self.gaugeValue = Math.floor(55 + Math.random() * 5);
     };
 
 
